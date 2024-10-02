@@ -115,7 +115,7 @@ with col2:
     st.pyplot(fig)
 
 # Gráfico 5: Médias das Taxas por Cidade (HOA, Property Tax, Fire Insurance)
-st.subheader(":rainbow[Médias das Taxas por Cidade]")
+st.subheader("Médias das Taxas por Cidade")
     
 # Verificar se há dados suficientes para as colunas de taxas
 if 'hoa (R$)' in filtered_df.columns and 'property tax (R$)' in filtered_df.columns and 'fire insurance (R$)' in filtered_df.columns:
