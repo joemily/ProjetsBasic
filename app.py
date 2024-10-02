@@ -82,8 +82,8 @@ with col2:
     # Remover o eixo Y
     ax.yaxis.set_visible(False)
     # Adicionar uma legenda personalizada
-    ax.legend(['Mobiliados', 'Não Mobiliados'], title='Casas para alugar')
-    # Remover as linhas de contorno (spines)
+    ax.legend(['Mobiliados', 'Não Mobiliados'], title='Casas')
+    # Remover as linhas de contorno
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
     ax.spines['left'].set_visible(False)
@@ -92,7 +92,7 @@ with col2:
     for container in ax.containers:
         for bar in container:
             height = bar.get_height()
-            ax.annotate(f'{height}',  # Formatar para duas casas decimais
+            ax.annotate(f'{height}',
                          xy=(bar.get_x() + bar.get_width() / 2, height),  # Coordenadas x e y
                          xytext=(0, 5),  # Deslocamento
                          textcoords="offset points",  # Sistema de coordenadas
@@ -101,17 +101,17 @@ with col2:
     # Exibir o gráfico no Streamlit
     st.pyplot(fig)
 
-    # Gráfico 4: por Localidade (Exemplo de gráfico de barras de preços por cidade)
+    # Gráfico 4: Valor médio do Aluguel por cidade 
     st.subheader("Preço Médio de Aluguel por Cidade")
     fig, ax = plt.subplots()
     price_data = filtered_df.groupby('city')['rent amount (R$)'].mean().sort_values(ascending=False)
     sns.barplot(x=price_data.values, y=price_data.index, ax=ax)
-    ax.set_title("")
     ax.set_xlabel("Aluguel Médio (R$)")
     ax.set_ylabel("")
     # Remover linha da direita e de cima
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
+    # Mostrar o gráfico
     st.pyplot(fig)
 
 # Gráfico 5: Médias das Taxas por Cidade (HOA, Property Tax, Fire Insurance)
@@ -125,18 +125,16 @@ if 'hoa (R$)' in filtered_df.columns and 'property tax (R$)' in filtered_df.colu
     # Configurar gráfico de barras agrupadas
     fig, ax = plt.subplots(figsize=(10, 6))
     avg_taxes_by_city.plot(kind='bar', ax=ax, color=['steelblue', 'darkorange', 'red'], width=0.8)
-    ax.set_title("")
     ax.set_xlabel("")
-    ax.set_ylabel("Valor Médio (R$)")
     ax.legend(["HOA", "Property Tax", "Fire Insurance"], title="Taxas")
         
-    # Adicionar uma mensagem no gráfico (posição x=2, y=10)
+    # Adicionar uma mensagem no gráfico
     message = 'Maior taxa de condomínio (HOA) é a de Belo\
     \nHorizonte. São Paulo, que tem um aluguel\
     \nmédio maior, possui um valor bem abaixo\
     \ndo que o de BH'
     ax.text(1, 2000, message, fontsize=10, color='midnightblue', 
-                   bbox=dict(facecolor='white', edgecolor='gray', boxstyle='round,pad=0.5'))
+                   bbox=dict(facecolor='white', edgecolor='lightgray', boxstyle='round,pad=0.5'))
     
     # Rotacionar os nomes das cidades no eixo x
     ax.set_xticklabels(ax.get_xticklabels(), rotation=45, ha='right')
@@ -156,13 +154,10 @@ if 'hoa (R$)' in filtered_df.columns and 'property tax (R$)' in filtered_df.colu
                          xytext=(0, 5),  # Deslocamento
                          textcoords="offset points",  # Sistema de coordenadas
                          ha='center', va='bottom')  # Alinhamento
-
+    # Mostrar gráfico
     st.pyplot(fig)
 else:
     st.write("As colunas 'hoa (R$)', 'property tax (R$)' e 'fire insurance (R$)' não estão presentes no dataset.")
-
-# Gráfico 6: 
-
 
 if filter_button:
     # Exibindo o DataFrame filtrado
