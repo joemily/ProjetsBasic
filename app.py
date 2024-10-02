@@ -32,7 +32,7 @@ with col1:
         # Contagem dos valores únicos na coluna 'animal'
         animal_counts = filtered_df['animal'].value_counts()
         # Criar labels customizadas
-        labels = ['Aceitos', 'Não Aceitos']
+        labels = ['Aceita', 'Não Aceita']
         # Criando o gráfico de pizza
         fig, ax = plt.subplots(figsize=(10, 7.2))
         ax.pie(animal_counts, labels=labels, autopct='%1.1f%%', colors=['steelblue', 'lightgray'], startangle=90)
@@ -82,7 +82,7 @@ with col2:
     # Remover o eixo Y
     ax.yaxis.set_visible(False)
     # Adicionar uma legenda personalizada
-    ax.legend(['Mobiliados', 'Não Mobiliados'], title='Casas')
+    ax.legend(['Mobiliadas', 'Não Mobiliadas'], title='Casas')
     # Remover as linhas de contorno
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
@@ -127,14 +127,6 @@ if 'hoa (R$)' in filtered_df.columns and 'property tax (R$)' in filtered_df.colu
     avg_taxes_by_city.plot(kind='bar', ax=ax, color=['steelblue', 'darkorange', 'red'], width=0.8)
     ax.set_xlabel("")
     ax.legend(["HOA", "Property Tax", "Fire Insurance"], title="Taxas")
-        
-    # Adicionar uma mensagem no gráfico
-    message = 'Maior taxa de condomínio (HOA) é a de Belo\
-    \nHorizonte. São Paulo, que tem um aluguel\
-    \nmédio maior, possui um valor bem abaixo\
-    \ndo que o de BH'
-    ax.text(1, 2000, message, fontsize=10, color='midnightblue', 
-                   bbox=dict(facecolor='white', edgecolor='lightgray', boxstyle='round,pad=0.5'))
     
     # Rotacionar os nomes das cidades no eixo x
     ax.set_xticklabels(ax.get_xticklabels(), rotation=45, ha='right')
