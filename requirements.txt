@@ -1,5 +1,4 @@
-streamlit
-pandas
+streamlit==1.32.0
+pandas=2.2.2
 seaborn==0.13.2
-matplotlib.pyplot
-matplotlib.patheffects
+matplotlib==3.8.4
